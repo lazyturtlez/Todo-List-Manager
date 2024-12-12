@@ -1,15 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 
 const json_path = "task_list.json"
 
 func main()  {
-	err := DeleteTask(json_path, "1")
+	err := root(os.Args[1:])
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		os.Exit(1)
 	}
-	fmt.Println("task list updated")
 }
 
