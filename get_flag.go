@@ -4,16 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"os"
 )
-
-
-type SubCommand interface {
-	Init([]string) error
-	Name() string
-	Run() error
-}
-
 
 type GetTasksCommand struct {
 	fs *flag.FlagSet
@@ -39,7 +30,7 @@ func (gtc *GetTasksCommand) Run() error {
 		return nil
 	}
 
-	currentTasks, err := GetTasks(json_path)
+	currentTasks, err := GetTasks()
 	if err != nil {
 		return err
 	}
@@ -57,26 +48,6 @@ func NewGetCommand() *GetTasksCommand {
 }
 
 
-func root(args []string) error {
-	if len(args) < 1 {
-		return errors.New("subcommand required")
-	}
-
-	cmds := []SubCommand{
-		NewGetCommand(),
-	}
-
-	subCommand := os.Args[1]
-
-	for _, cmd := range cmds {
-		if cmd.Name() == subCommand {
-			cmd.Init(os.Args[2:])
-			return cmd.Run()
-		}
-	}
-
-	return fmt.Errorf("unknown subcommand: %s", subCommand)
-}
 
 
 

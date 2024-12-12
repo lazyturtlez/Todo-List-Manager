@@ -22,9 +22,9 @@ type TaskDetails struct {
 type TaskList []TaskWrapper
 
 
-func GetTasks(filePath string) (TaskList, error) {
+func GetTasks() (TaskList, error) {
 	
-	dat, err := os.ReadFile(filePath)
+	dat, err := os.ReadFile(json_path)
 	if err != nil {
 		return TaskList{}, err
 	}
@@ -38,7 +38,7 @@ func GetTasks(filePath string) (TaskList, error) {
 	return currentTasks, nil
 }
 
-func AddTask(filePath, title string) error { 
+func AddTask(title string) error { 
 
 	newTask := TaskWrapper{
 		Task: TaskDetails{
@@ -48,7 +48,7 @@ func AddTask(filePath, title string) error {
 		},
 	}
 
-	taskList, err := GetTasks(filePath)
+	taskList, err := GetTasks()
 	if err != nil {
 		return err
 	}
@@ -68,9 +68,9 @@ func AddTask(filePath, title string) error {
 	return nil
 }
 
-func DeleteTask(filePath, id string) error {
+func DeleteTask(id string) error {
 
-	taskList, err := GetTasks(filePath)
+	taskList, err := GetTasks()
 	if err != nil {
 		return err
 	}
