@@ -20,6 +20,7 @@ func root(args []string) error {
 	cmds := []SubCommand{
 		NewGetCommand(),
 		NewAddCommand(),
+		NewDeleteCommand(),
 	}
 
 	subCommand := os.Args[1]
