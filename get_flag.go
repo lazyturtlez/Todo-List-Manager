@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -34,7 +35,8 @@ func (gtc *GetTasksCommand) Run() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(currentTasks)
+	dat, err := json.MarshalIndent(currentTasks, "", "\t")
+	fmt.Println(string(dat))
 	return nil
 }
 

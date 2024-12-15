@@ -38,8 +38,10 @@ func (dtc *DeleteTaskCommand) Run() error {
 		for _, arg := range args {
 			err := DeleteTask(arg)
 			if err != nil {
-				return err
+				fmt.Print(err)
+				continue
 			}
+			fmt.Printf("delete task with id: %s\n", arg)
 		}
 		return nil
 	}
@@ -47,7 +49,13 @@ func (dtc *DeleteTaskCommand) Run() error {
 	if len(args) > 1 {
 		return errors.New("Please use the -multiple flag to delete more then one task")
 	}
-	DeleteTask(args[0])
+	err := DeleteTask(args[0])
+
+	if err != nil {
+		fmt.Print(err)
+		return nil
+	}
+
 	fmt.Printf("deleted task with id: %s\n", args[0])
 	return nil
 }
