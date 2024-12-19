@@ -27,7 +27,10 @@ func (gtc *GetTasksCommand) Run() error {
 	}
 
 	if gtc.list {
-		println("Should be in list format")
+		err := GetTasksList()
+		if err != nil {
+			return err
+		}
 		return nil
 	}
 
