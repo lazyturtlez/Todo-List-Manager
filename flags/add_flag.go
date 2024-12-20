@@ -1,9 +1,11 @@
-package main
+package flags
 
 import (
 	"errors"
 	"flag"
 	"fmt"
+
+	"github.com/lazyturtlez/todoCli/tasks"
 )
 
 
@@ -27,7 +29,7 @@ func (atc *AddTaskCommand) Run() error {
 
 	if atc.multiple {
 		for _, arg := range args {
-			AddTask(arg)
+			tasks.AddTask(arg)
 			fmt.Printf("added: %s\n", arg)
 		}
 		return nil
@@ -37,7 +39,7 @@ func (atc *AddTaskCommand) Run() error {
 		return errors.New("to many args to process, use -multiple flag to process multiple tasks")
 	}
 
-	AddTask(args[0])
+	tasks.AddTask(args[0])
 	fmt.Printf("added: %s\n", args[0])
 	return nil
 }

@@ -1,10 +1,12 @@
-package main
+package flags
 
 import (
 	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
+
+	"github.com/lazyturtlez/todoCli/tasks"
 )
 
 type GetTasksCommand struct {
@@ -27,14 +29,14 @@ func (gtc *GetTasksCommand) Run() error {
 	}
 
 	if gtc.list {
-		err := GetTasksList()
+		err := tasks.GetTasksList()
 		if err != nil {
 			return err
 		}
 		return nil
 	}
 
-	currentTasks, err := GetTasks()
+	currentTasks, err := tasks.GetTasks()
 	if err != nil {
 		return err
 	}

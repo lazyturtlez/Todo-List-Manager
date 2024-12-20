@@ -1,8 +1,10 @@
-package main
+package tasks
 
 import (
 	"time"
 )
+
+const json_path = "task_list.json"
 
 type TaskWrapper struct {
 	Task TaskDetails `json:"task"`

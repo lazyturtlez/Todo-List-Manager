@@ -1,9 +1,11 @@
-package main
+package flags
 
 import (
 	"errors"
 	"flag"
 	"fmt"
+
+	"github.com/lazyturtlez/todoCli/tasks"
 )
 
 type DeleteTaskCommand struct {
@@ -36,7 +38,7 @@ func (dtc *DeleteTaskCommand) Run() error {
 
 	if dtc.multiple {
 		for _, arg := range args {
-			err := DeleteTask(arg)
+			err := tasks.DeleteTask(arg)
 			if err != nil {
 				fmt.Print(err)
 				continue
@@ -49,7 +51,7 @@ func (dtc *DeleteTaskCommand) Run() error {
 	if len(args) > 1 {
 		return errors.New("Please use the -multiple flag to delete more then one task")
 	}
-	err := DeleteTask(args[0])
+	err := tasks.DeleteTask(args[0])
 
 	if err != nil {
 		fmt.Print(err)

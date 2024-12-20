@@ -1,4 +1,4 @@
-package main
+package flags
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ type SubCommand interface {
 	Run() error
 }
 
-func root(args []string) error {
+func Root(args []string) error {
 	if len(args) < 1 {
 		return errors.New("subcommand required")
 	}
